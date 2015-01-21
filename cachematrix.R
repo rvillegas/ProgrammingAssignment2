@@ -4,6 +4,14 @@
 
 ## Write a short comment describing this function
 
+##This function take a matrix and save it and prepare it to
+## calculate the inverse, save it in cache and use it every time
+## without recalculate it, with big matrices take a long time.
+## I add a easy way to enter the matrix in set function and make 
+## the standard way using all sintaxis of R.
+## Always the matrix is changed, the inverse is NULL, and it must be 
+## recalculated.
+
 makeCacheMatrix <- function(x = matrix()) {
   ## iMx is inverse matrix  
   iMx<-NULL
@@ -30,12 +38,19 @@ makeCacheMatrix <- function(x = matrix()) {
 
 ## Write a short comment describing this function
 
+## this function calculate the inverse of matrix using the R function Solve.
+## the difference in this function it must be calculated only when de matrix
+## is changed, 
+
 cacheSolve <- function(x, ...) {
+  ## get the value of the inverse of the matrix
   inverse <- x$getInverse()
+  ## if the value is not null, the function return the value from getInverse
   if (!is.null(inverse)){
     message("getting cached data")
     return (inverse)
   }
+  ## if not the inverse must be recalculated
   data <- x$get()
   inverse <- solve(data)
   x$setInverse(inverse)
